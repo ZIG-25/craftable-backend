@@ -28,7 +28,7 @@ public class Creator {
 
     private String surname;
 
-    private Integer phone_number;
+    private Integer phoneNumber;
 
     @OneToMany(mappedBy="creatorId")
     private List<Profession> professions;

@@ -10,7 +10,7 @@ import lombok.Setter;
 public class Administrator {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer Id;
+    private Integer id;
 
     @Column(unique = true)
 
