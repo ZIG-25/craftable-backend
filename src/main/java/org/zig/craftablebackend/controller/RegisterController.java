@@ -10,7 +10,7 @@ import org.zig.craftablebackend.dto.RegisterRequest;
 import org.zig.craftablebackend.service.RegisterService;
 
 @RestController
-@RequestMapping("/api/register")
+@RequestMapping("/user/create")
 public class RegisterController {
 
     @Autowired
