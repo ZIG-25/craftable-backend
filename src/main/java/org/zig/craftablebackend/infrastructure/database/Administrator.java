@@ -1,4 +1,4 @@
-package org.zig.craftablebackend.database;
+package org.zig.craftablebackend.infrastructure.database;
 
 import jakarta.persistence.*;
 import lombok.Getter;
