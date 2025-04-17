@@ -15,7 +15,7 @@ public class AdminRegisterService {
     private BCryptPasswordEncoder passwordEncoder;
 
     public String register(AdminRegisterDto request) {
-        if (repository.findByEmail(request.getEmail()).isPresent()) return "Email already in use.";
+        if (repository.findAdministratorByEmail(request.getEmail()).isPresent()) return "Email already in use.";
         Administrator admin = new Administrator();
         admin.setLogin(request.getLogin());
         admin.setPassword(passwordEncoder.encode(request.getPassword()));

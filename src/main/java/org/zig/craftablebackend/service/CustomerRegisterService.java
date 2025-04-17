@@ -15,7 +15,7 @@ public class CustomerRegisterService {
     private BCryptPasswordEncoder passwordEncoder;
 
     public String register(CustomerRegisterDto request) {
-        if (repository.findByEmail(request.getEmail()).isPresent()) return "Email already in use.";
+        if (repository.findCustomerByEmail(request.getEmail()).isPresent()) return "Email already in use.";
         Customer customer = new Customer();
         customer.setLogin(request.getLogin());
         customer.setPassword(passwordEncoder.encode(request.getPassword()));
