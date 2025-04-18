@@ -3,7 +3,7 @@ package org.zig.craftablebackend.infrastructure.database;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.zig.craftablebackend.database.shared.UserRole;
+import org.zig.craftablebackend.infrastructure.shared.UserRole;
 
 import java.util.Date;
 
