@@ -1,5 +1,6 @@
 package org.zig.craftablebackend.database;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,8 +33,9 @@ public class Creator {
 
     @OneToMany(mappedBy="creatorId")
     private List<Profession> professions;
-
-    @OneToMany(mappedBy="creatorId")
+    
+    @OneToMany(mappedBy = "creatorId", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<PortfolioItem> portfolioItems;
 
     @OneToMany(mappedBy="creatorId")
