@@ -3,6 +3,7 @@ package org.zig.craftablebackend.infrastructure.database;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.zig.craftablebackend.infrastructure.shared.UserRole;
 
 import java.util.Date;
 
@@ -25,7 +26,7 @@ public class Report {
     private Date date;
 
     @Enumerated(EnumType.STRING)
-    private UserRole targeted_user_role;
+    private UserRole targetedUserRole;
 
     @ManyToOne
     @JoinColumn(name="creator_id", nullable=false)
@@ -34,9 +35,4 @@ public class Report {
     @ManyToOne
     @JoinColumn(name="customer_id", nullable=false)
     private Customer customerId;
-}
-
-enum UserRole {
-    CREATOR,
-    CUSTOMER
 }

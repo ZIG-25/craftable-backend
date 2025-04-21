@@ -15,7 +15,7 @@ public class CreatorRegisterService {
     private BCryptPasswordEncoder passwordEncoder;
 
     public String register(CreatorRegisterDto request) {
-        if (repository.findByEmail(request.getEmail()).isPresent()) return "Email already in use.";
+        if (repository.findCreatorByEmail(request.getEmail()).isPresent()) return "Email already in use.";
         Creator creator = new Creator();
         creator.setLogin(request.getLogin());
         creator.setPassword(passwordEncoder.encode(request.getPassword()));
@@ -23,7 +23,7 @@ public class CreatorRegisterService {
         creator.setName(request.getName());
         creator.setSurname(request.getSurname());
         creator.setBio(request.getBio());
-        creator.setPhone_number(request.getPhoneNumber());
+        creator.setPhoneNumber(request.getPhoneNumber());
         repository.save(creator);
         return "Creator registration successful";
     }

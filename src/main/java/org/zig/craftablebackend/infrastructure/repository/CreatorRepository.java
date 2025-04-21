@@ -6,5 +6,5 @@ import org.zig.craftablebackend.infrastructure.database.Creator;
 import java.util.Optional;
 
 public interface CreatorRepository extends JpaRepository<Creator, Integer> {
-    Optional<Creator> findByEmail(String email);
+    Optional<Creator> findCreatorByEmail(String email);
 }
