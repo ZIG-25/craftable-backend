@@ -1,4 +1,4 @@
-package org.zig.craftablebackend.database;
+package org.zig.craftablebackend.infrastructure.database;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
