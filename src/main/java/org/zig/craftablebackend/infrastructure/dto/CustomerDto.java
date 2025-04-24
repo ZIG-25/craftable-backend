@@ -1,10 +1,10 @@
-package org.zig.craftablebackend.dto;
+package org.zig.craftablebackend.infrastructure.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.zig.craftablebackend.infrastructure.database.Customer;
+import org.zig.craftablebackend.infrastructure.entity.Customer;
 
 @Getter
 @AllArgsConstructor
@@ -13,6 +13,7 @@ import org.zig.craftablebackend.infrastructure.database.Customer;
 public class CustomerDto {
     private Integer id;
     private String login;
+    private String password;
     private String email;
     private String bio;
     private String name;
@@ -22,6 +23,7 @@ public class CustomerDto {
         CustomerDto dto = new CustomerDto(
                 customer.getId(),
                 customer.getLogin(),
+                customer.getPassword(),
                 customer.getEmail(),
                 customer.getBio(),
                 customer.getName(),
@@ -31,13 +33,14 @@ public class CustomerDto {
     }
 
     public static Customer toEntity(CustomerDto dto) {
-    Customer customer = new Customer();
-    customer.setId(dto.getId());
-    customer.setLogin(dto.getLogin());
-    customer.setEmail(dto.getEmail());
-    customer.setBio(dto.getBio());
-    customer.setName(dto.getName());
-    customer.setSurname(dto.getSurname());
-    return customer;
+        Customer customer = new Customer();
+        customer.setId(dto.getId());
+        customer.setLogin(dto.getLogin());
+        customer.setEmail(dto.getEmail());
+        customer.setPassword(dto.getPassword());
+        customer.setBio(dto.getBio());
+        customer.setName(dto.getName());
+        customer.setSurname(dto.getSurname());
+        return customer;
     }
 }

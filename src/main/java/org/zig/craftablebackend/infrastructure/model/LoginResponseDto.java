@@ -1,4 +1,4 @@
-package org.zig.craftablebackend.controller;
+package org.zig.craftablebackend.infrastructure.model;
 
 import lombok.Getter;
 import lombok.Setter;
