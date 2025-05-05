@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-@PreAuthorize("hasAnyRole('CUSTOMER')")
 class HelloWorldEndpoint {
     @GetMapping("/hello")
     public String helloWorld() {
