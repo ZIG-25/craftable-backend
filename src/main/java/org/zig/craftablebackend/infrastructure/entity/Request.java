@@ -1,34 +1,37 @@
-package org.zig.craftablebackend.infrastructure.database;
+package org.zig.craftablebackend.infrastructure.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.Date;
 
 @Setter
 @Getter
 @Entity
-public class ItemForSale {
+public class Request {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
     private Integer Id;
 
     @Column(unique = true)
+    private Integer price;
+
     private String description;
 
     private String title;
 
-    private Integer price;
+    private String status;
 
-    @OneToOne(mappedBy = "itemForSale")
-    private ItemOrder itemOrder;
+    @Temporal(TemporalType.DATE)
+    private Date deadline;
+
+    @ManyToOne
+    @JoinColumn(name="customer_id", nullable=false)
+    private Customer customerId;
 
     @ManyToOne
     @JoinColumn(name="creator_id", nullable=false)
     private Creator creatorId;
-
-    @OneToMany(mappedBy="itemForSale")
-    private List<ItemPicture> itemPictures;
 }
+

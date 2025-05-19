@@ -1,8 +1,11 @@
-package org.zig.craftablebackend.infrastructure.database;
+package org.zig.craftablebackend.infrastructure.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.List;
 import java.util.Set;
@@ -20,6 +23,7 @@ public class Creator {
 
     private String password;
 
+    @Column(unique = true)
     private String email;
 
     private String bio;
@@ -30,7 +34,7 @@ public class Creator {
 
     private Integer phoneNumber;
 
-    @OneToMany(mappedBy="creatorId")
+    @OneToMany(mappedBy="creatorId", cascade = CascadeType.ALL)
     private List<Profession> professions;
 
     @OneToMany(mappedBy="creatorId")

@@ -1,4 +1,4 @@
-package org.zig.craftablebackend.model;
+package org.zig.craftablebackend.infrastructure.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,8 +1,11 @@
-package org.zig.craftablebackend.infrastructure.database;
+package org.zig.craftablebackend.infrastructure.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Setter
 @Getter
@@ -12,7 +15,7 @@ public class Profession {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer Id;
 
-    @Column(unique = true)
+    @Column()
     private String profession;
 
     @ManyToOne
