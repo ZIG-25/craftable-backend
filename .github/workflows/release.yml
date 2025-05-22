@@ -3,7 +3,7 @@ name: Build and Push Spring App
 on:
   push:
     branches:
-      - main #TODO: Change for master
+      - master
   workflow_dispatch:
 
 
@@ -42,5 +42,5 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: | 
-            ${{ secrets.DOCKER_USERNAME }}/craftable-backtend:${{ github.sha }}
-            ${{ secrets.DOCKER_USERNAME }}/craftable-backtend:latest
+            ${{ secrets.DOCKER_USERNAME }}/craftable-backend:${{ github.sha }}
+            ${{ secrets.DOCKER_USERNAME }}/craftable-backend:latest
