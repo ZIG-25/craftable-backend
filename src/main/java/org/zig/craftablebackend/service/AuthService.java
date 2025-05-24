@@ -2,13 +2,12 @@ package org.zig.craftablebackend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import org.zig.craftablebackend.controllers.LoginResponseDto;
-import org.zig.craftablebackend.database.Creator;
-import org.zig.craftablebackend.database.Customer;
-import org.zig.craftablebackend.database.models.LoginCredentials;
-import org.zig.craftablebackend.repository.CreatorRepository;
-import org.zig.craftablebackend.repository.CustomerRepository;
+import org.zig.craftablebackend.controller.LoginResponseDto;
+import org.zig.craftablebackend.infrastructure.database.Creator;
+import org.zig.craftablebackend.infrastructure.database.Customer;
+import org.zig.craftablebackend.model.LoginCredentials;
+import org.zig.craftablebackend.infrastructure.repository.CreatorRepository;
+import org.zig.craftablebackend.infrastructure.repository.CustomerRepository;
 
 import java.util.Optional;
 
