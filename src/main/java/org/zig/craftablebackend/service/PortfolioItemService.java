@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import org.zig.craftablebackend.database.Creator;
-import org.zig.craftablebackend.database.PortfolioItem;
-import org.zig.craftablebackend.repository.CreatorRepository;
+import org.zig.craftablebackend.infrastructure.database.Creator;
+import org.zig.craftablebackend.infrastructure.database.PortfolioItem;
+import org.zig.craftablebackend.infrastructure.repository.CreatorRepository;
 import org.zig.craftablebackend.repository.PortfolioItemRepository;
 import org.zig.craftablebackend.shared.TokenUtils;
 
