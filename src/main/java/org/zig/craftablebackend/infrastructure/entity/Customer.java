@@ -1,4 +1,4 @@
-package org.zig.craftablebackend.infrastructure.database;
+package org.zig.craftablebackend.infrastructure.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -20,6 +20,7 @@ public class Customer {
 
     private String password;
 
+    @Column(unique = true)
     private String email;
 
     private String bio;

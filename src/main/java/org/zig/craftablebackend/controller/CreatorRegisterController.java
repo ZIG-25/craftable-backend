@@ -6,18 +6,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.zig.craftablebackend.infrastructure.dto.CreatorDto;
 import org.zig.craftablebackend.dto.CreatorDto;
 import org.zig.craftablebackend.dto.CreatorRegisterDto;
 import org.zig.craftablebackend.service.CreatorRegisterService;
 
 @RestController
-@RequestMapping("/seller/create")
+@RequestMapping("api/seller")
 public class CreatorRegisterController {
-    @Autowired
-    private CreatorRegisterService service;
+    private final CreatorRegisterService service;
 
-    @PostMapping
-    public ResponseEntity<String> register(@RequestBody CreatorRegisterDto request) {
+    @Autowired
+    public CreatorRegisterController(CreatorRegisterService service) {
+        this.service = service;
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<String> register(@RequestBody CreatorDto request) {
+        System.out.println(request);
         String result = service.register(request);
 
         if (result.equals("Creator registration successful")) {
