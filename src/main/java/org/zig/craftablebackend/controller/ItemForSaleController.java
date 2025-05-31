@@ -30,8 +30,13 @@ public class ItemForSaleController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ItemForSaleDto>> getAll() {
-        return ResponseEntity.ok(itemService.getAllItems());
+    public ResponseEntity<List<ItemForSaleDto>> getAll(
+            @RequestParam(required = false) Integer creatorId,
+            @RequestParam(required = false) String professionName,
+            @RequestParam(required = false) Integer minPrice,
+            @RequestParam(required = false) Integer maxPrice
+    ) {
+        return ResponseEntity.ok(itemService.getFilteredItems(creatorId, professionName, minPrice, maxPrice));
     }
 
     @DeleteMapping("/{id}")
@@ -46,5 +51,10 @@ public class ItemForSaleController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+    @GetMapping("/by-artist/{creatorId}")
+    public ResponseEntity<List<ItemForSaleDto>> getByArtist(@PathVariable Integer creatorId) {
+        return ResponseEntity.ok(itemService.getItemsByArtistId(creatorId));
+    }
+
 
 }

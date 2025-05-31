@@ -12,7 +12,6 @@ public class ItemOrderDto {
     private String deliveryAddress;
     private Date date;
     private String status;
-
     private Integer customerId;
     private Integer itemForSaleId;
 }
