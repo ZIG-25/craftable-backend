@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.zig.craftablebackend.infrastructure.database.Administrator;
+import org.zig.craftablebackend.infrastructure.entity.Administrator;
 
 @Getter
 @AllArgsConstructor

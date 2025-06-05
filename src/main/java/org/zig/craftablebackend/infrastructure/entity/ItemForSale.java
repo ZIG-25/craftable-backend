@@ -15,7 +15,6 @@ public class ItemForSale {
     @Column(name = "id")
     private Integer Id;
 
-    @Column(unique = true)
     private String description;
 
     private String title;
@@ -29,6 +28,6 @@ public class ItemForSale {
     @JoinColumn(name="creator_id", nullable=false)
     private Creator creatorId;
 
-    @OneToMany(mappedBy="itemForSale")
+    @OneToMany(mappedBy="itemForSale", cascade = CascadeType.ALL)
     private List<ItemPicture> itemPictures;
 }

@@ -1,8 +1,9 @@
 package org.zig.craftablebackend.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.zig.craftablebackend.infrastructure.dto.ItemForSaleDto;
+import org.zig.craftablebackend.dto.ItemForSaleDto;
 import org.zig.craftablebackend.service.ItemForSaleService;
 
 import java.util.List;
@@ -13,6 +14,7 @@ public class ItemForSaleController {
 
     private final ItemForSaleService itemService;
 
+    @Autowired
     public ItemForSaleController(ItemForSaleService itemService) {
         this.itemService = itemService;
     }
@@ -22,12 +24,12 @@ public class ItemForSaleController {
         return ResponseEntity.ok(itemService.createItem(dto));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ItemForSaleDto> update(@PathVariable Integer id, @RequestBody ItemForSaleDto dto) {
-        return itemService.updateItem(id, dto)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
+//    @PutMapping("/update")
+//    public ResponseEntity<ItemForSaleDto> update(@RequestBody ItemForSaleDto dto) {
+//        return itemService.updateItem(dto)
+//                .map(ResponseEntity::ok)
+//                .orElse(ResponseEntity.notFound().build());
+//    }
 
     @GetMapping
     public ResponseEntity<List<ItemForSaleDto>> getAll(

@@ -1,10 +1,13 @@
 package org.zig.craftablebackend.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.zig.craftablebackend.dto.ItemOrderDto;
 import org.zig.craftablebackend.infrastructure.entity.ItemOrder;
 import org.zig.craftablebackend.service.ItemOrderService;
+import org.zig.craftablebackend.service.JwtService;
 
 import java.util.List;
 
@@ -13,6 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ItemOrderController {
     private final ItemOrderService itemOrderService;
+    private final JwtService jwtService;
 
     @GetMapping
     public List<ItemOrder> getAllOrders() {
@@ -27,11 +31,18 @@ public class ItemOrderController {
     }
 
     @PostMapping
-    public ResponseEntity<ItemOrder> createOrder(@RequestBody ItemOrder order,
-                                                 @RequestParam Integer customerId,
-                                                 @RequestParam Integer itemForSaleId) {
+    public ResponseEntity<ItemOrderDto> createOrder(@RequestBody ItemOrderDto itemOrderDto, @RequestHeader HttpHeaders headers) {
         try {
-            return ResponseEntity.ok(itemOrderService.createOrder(order, customerId, itemForSaleId));
+            return ResponseEntity.ok(itemOrderService.createOrder(itemOrderDto, jwtService.extractEmail(headers)));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
+    @GetMapping("/by-artist")
+    public ResponseEntity<List<ItemOrderDto>> getAllOrdersByArtist(@RequestHeader HttpHeaders headers) {
+        try {
+            return ResponseEntity.ok(itemOrderService.getForArtist(jwtService.extractEmail(headers)));
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(null);
         }

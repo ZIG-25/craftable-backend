@@ -7,7 +7,7 @@ import org.springframework.web.server.ResponseStatusException;
 import org.zig.craftablebackend.infrastructure.entity.Creator;
 import org.zig.craftablebackend.infrastructure.entity.PortfolioItem;
 import org.zig.craftablebackend.infrastructure.repository.CreatorRepository;
-import org.zig.craftablebackend.repository.PortfolioItemRepository;
+import org.zig.craftablebackend.infrastructure.repository.PortfolioItemRepository;
 import org.zig.craftablebackend.shared.TokenUtils;
 
 import org.slf4j.Logger;

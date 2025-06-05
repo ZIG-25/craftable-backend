@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.zig.craftablebackend.infrastructure.database.Customer;
+import org.zig.craftablebackend.infrastructure.entity.Customer;
 
 @Getter
 @AllArgsConstructor
@@ -12,6 +12,7 @@ import org.zig.craftablebackend.infrastructure.database.Customer;
 @Setter
 public class CustomerDto {
     private Integer id;
+    private String password;
     private String login;
     private String email;
     private String bio;
@@ -21,6 +22,7 @@ public class CustomerDto {
     public static CustomerDto fromEntity(Customer customer) {
         CustomerDto dto = new CustomerDto(
                 customer.getId(),
+                null,
                 customer.getLogin(),
                 customer.getEmail(),
                 customer.getBio(),
@@ -33,6 +35,7 @@ public class CustomerDto {
     public static Customer toEntity(CustomerDto dto) {
     Customer customer = new Customer();
     customer.setId(dto.getId());
+    customer.setPassword(dto.getPassword());
     customer.setLogin(dto.getLogin());
     customer.setEmail(dto.getEmail());
     customer.setBio(dto.getBio());

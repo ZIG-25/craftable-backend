@@ -2,6 +2,7 @@ package org.zig.craftablebackend.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.zig.craftablebackend.dto.ItemOrderDto;
 import org.zig.craftablebackend.infrastructure.entity.ItemOrder;
 import org.zig.craftablebackend.infrastructure.entity.Customer;
 import org.zig.craftablebackend.infrastructure.entity.ItemForSale;
@@ -27,15 +28,17 @@ public class ItemOrderService {
         return itemOrderRepository.findById(id);
     }
 
-    public ItemOrder createOrder(ItemOrder order, Integer customerId, Integer itemForSaleId) {
-        Customer customer = customerRepository.findById(customerId)
+    public ItemOrderDto createOrder(ItemOrderDto itemOrderDto, String customerEmail) {
+        Customer customer = customerRepository.findCustomerByEmail(customerEmail)
                 .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
-        ItemForSale item = itemForSaleRepository.findById(itemForSaleId)
+        ItemForSale item = itemForSaleRepository.findById(itemOrderDto.getItemForSaleId().getId())
                 .orElseThrow(() -> new IllegalArgumentException("ItemForSale not found"));
 
-        order.setCustomerId(customer);
-        order.setItemForSale(item);
-        return itemOrderRepository.save(order);
+        ItemOrder itemOrder = ItemOrderDto.fromDto(itemOrderDto);
+        itemOrder.setCustomerId(customer);
+        itemOrder.setItemForSale(item);
+        ItemOrder save = itemOrderRepository.save(itemOrder);
+        return ItemOrderDto.toDto(save);
     }
 
     public void deleteOrder(Integer id) {
@@ -49,5 +52,14 @@ public class ItemOrderService {
         existing.setStatus(updatedOrder.getStatus());
         existing.setDate(updatedOrder.getDate());
         return itemOrderRepository.save(existing);
+    }
+
+    public List<ItemOrderDto> getForArtist(String artistEmail) {
+        return itemOrderRepository.findAll().stream()
+                .filter(
+                        item -> item.getItemForSale().getCreatorId().getEmail().equals(artistEmail)
+                )
+                .map(ItemOrderDto::toDto)
+                .toList();
     }
 }
