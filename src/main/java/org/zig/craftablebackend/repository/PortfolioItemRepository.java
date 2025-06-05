@@ -1,8 +1,8 @@
 package org.zig.craftablebackend.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import org.zig.craftablebackend.database.Creator;
-import org.zig.craftablebackend.database.PortfolioItem;
+import org.zig.craftablebackend.infrastructure.entity.Creator;
+import org.zig.craftablebackend.infrastructure.entity.PortfolioItem;
 
 import java.util.List;
 
