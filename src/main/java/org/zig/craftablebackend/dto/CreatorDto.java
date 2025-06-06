@@ -23,6 +23,7 @@ public class CreatorDto {
     private List<String> professions;
     private List<ItemForSaleDto> storeItems = new ArrayList<>();
     private List<PortfolioItemDto> portfolioItems = new ArrayList<>();
+    private List<RequestDto> requests = new ArrayList<>();
 
     private CreatorDto(Integer id,
                        String login,
@@ -82,7 +83,8 @@ public class CreatorDto {
                 creator.getPhoneNumber(),
                 creator.getProfessions().stream().map(Profession::getProfession).toList(),
                 creator.getItemsForSale().stream().map(ItemForSaleDto::toDto).toList(),
-                creator.getPortfolioItems().stream().map(PortfolioItemDto::toDto).toList()
+                creator.getPortfolioItems().stream().map(PortfolioItemDto::toDto).toList(),
+                creator.getRequests().stream().map(RequestDto::toDto).toList()
         );
 
         return dto;

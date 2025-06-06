@@ -4,14 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import org.zig.craftablebackend.dto.PortfolioItemDto;
 import org.zig.craftablebackend.infrastructure.entity.Creator;
 import org.zig.craftablebackend.infrastructure.entity.PortfolioItem;
 import org.zig.craftablebackend.infrastructure.repository.CreatorRepository;
 import org.zig.craftablebackend.infrastructure.repository.PortfolioItemRepository;
 import org.zig.craftablebackend.shared.TokenUtils;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -19,17 +17,15 @@ import java.util.List;
 public class PortfolioItemService {
     private final PortfolioItemRepository portfolioItemRepository;
     private final CreatorRepository creatorRepository;
-    private final TokenUtils tokenUtils;
+    private final PictureSevice pictureSevice;
 
-    private static final Logger logger = LoggerFactory.getLogger(PortfolioItemService.class);
 
     @Autowired
     public PortfolioItemService(PortfolioItemRepository portfolioItemRepository,
-                                CreatorRepository creatorRepository,
-                                TokenUtils tokenUtils) {
+                                CreatorRepository creatorRepository, PictureSevice pictureSevice) {
         this.portfolioItemRepository = portfolioItemRepository;
         this.creatorRepository = creatorRepository;
-        this.tokenUtils = tokenUtils;
+        this.pictureSevice = pictureSevice;
     }
 
     public List<PortfolioItem> getAll() {
@@ -40,18 +36,16 @@ public class PortfolioItemService {
         return portfolioItemRepository.findById(id).orElseThrow(() -> new RuntimeException("PortfolioItem not found"));
     }
 
-    public PortfolioItem create(String authHeader, PortfolioItem portfolioItem) {
-        String token = authHeader.replace("Bearer ", "");
-
-        logger.info("🔑 Token received: {}", token);
-        String email = tokenUtils.getEmailFromToken(token);
-        logger.info("🔍 Looking up creator with email: {}", email);
+    public PortfolioItemDto create(String email, PortfolioItemDto portfolioItem) {
         Creator creator = creatorRepository.findCreatorByEmail(email)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid creator"));
 
-        portfolioItem.setCreatorId(creator);
+        PortfolioItem item = PortfolioItemDto.fromDto(portfolioItem);
+        item.setPhotoUrl(pictureSevice.savePicture(portfolioItem.getPhotoUrl()));
+        item.setCreatorId(creator);
 
-        return portfolioItemRepository.save(portfolioItem);
+        PortfolioItem save = portfolioItemRepository.save(item);
+        return PortfolioItemDto.toDto(save);
     }
 
     public void delete(long id) {

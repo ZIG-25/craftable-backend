@@ -31,6 +31,11 @@ public class CreatorController {
         return creatorService.getOne(id);
     }
 
+    @PostMapping("/update")
+    public CreatorDto updateCreator(@RequestBody CreatorDto creatorDto) {
+        return creatorService.updateCreator(creatorDto);
+    }
+
     @GetMapping("/self")
     public CreatorDto getSelf(@RequestHeader HttpHeaders headers) {
         return creatorService.getOneByEmail(jwtService.extractEmail(headers));

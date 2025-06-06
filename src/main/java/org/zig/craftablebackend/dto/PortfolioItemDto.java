@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.zig.craftablebackend.infrastructure.entity.PortfolioItem;
+import org.zig.craftablebackend.service.PictureSevice;
 
 @Getter
 @Setter
@@ -19,11 +20,20 @@ public class PortfolioItemDto {
 
     public static PortfolioItemDto toDto(PortfolioItem portfolioItem) {
         return new PortfolioItemDto(
-            portfolioItem.getId(),
-            portfolioItem.getPhotoUrl(),
-            portfolioItem.getDescription(),
-            portfolioItem.getTitle(),
-            portfolioItem.getCreatorId().getId()
+                portfolioItem.getId(),
+                PictureSevice.convertImageToBase64(portfolioItem.getPhotoUrl()),
+                portfolioItem.getDescription(),
+                portfolioItem.getTitle(),
+                portfolioItem.getCreatorId().getId()
         );
+    }
+
+    public static PortfolioItem fromDto(PortfolioItemDto portfolioItem) {
+        PortfolioItem item = new PortfolioItem();
+        item.setId(portfolioItem.getId());
+        item.setPhotoUrl(portfolioItem.getPhotoUrl());
+        item.setDescription(portfolioItem.getDescription());
+        item.setTitle(portfolioItem.getTitle());
+        return item;
     }
 }

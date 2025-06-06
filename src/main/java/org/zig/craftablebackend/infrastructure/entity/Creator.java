@@ -14,6 +14,7 @@ import java.util.Set;
 @Setter
 @Getter
 @Entity
+@ToString
 public class Creator {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,7 +36,7 @@ public class Creator {
 
     private Integer phoneNumber;
 
-    @OneToMany(mappedBy="creatorId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="creatorId", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Profession> professions;
 
     @OneToMany(mappedBy = "creatorId", cascade = CascadeType.ALL)

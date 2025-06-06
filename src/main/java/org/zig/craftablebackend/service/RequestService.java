@@ -37,4 +37,13 @@ public class RequestService {
         Request save = requestRepository.save(request);
         return RequestDto.toDto(save);
     }
+
+    public RequestDto updateStatus(RequestDto requestDto) {
+        Request request = requestRepository.findById(
+                requestDto.getId()
+        ).orElseThrow(() -> new IllegalArgumentException("No such request"));
+        request.setStatus(requestDto.getStatus());
+        requestRepository.save(request);
+        return RequestDto.toDto(request);
+    }
 }

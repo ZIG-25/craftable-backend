@@ -31,4 +31,13 @@ public class RequestController {
             return ResponseEntity.badRequest().body(null);
         }
     }
+
+    @PostMapping("/update")
+    public ResponseEntity<RequestDto> updateRequest(@RequestBody RequestDto requestDto) {
+        try {
+            return ResponseEntity.ok(requestService.updateStatus(requestDto));
+        }  catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
 }

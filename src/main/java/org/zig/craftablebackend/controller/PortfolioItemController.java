@@ -2,10 +2,13 @@ package org.zig.craftablebackend.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
+import org.zig.craftablebackend.dto.PortfolioItemDto;
 import org.zig.craftablebackend.infrastructure.entity.Creator;
 import org.zig.craftablebackend.infrastructure.entity.PortfolioItem;
 import org.zig.craftablebackend.infrastructure.repository.CreatorRepository;
+import org.zig.craftablebackend.service.JwtService;
 import org.zig.craftablebackend.service.PortfolioItemService;
 import org.zig.craftablebackend.shared.TokenUtils;
 
@@ -18,15 +21,17 @@ import java.util.Optional;
 public class PortfolioItemController {
 
     private final PortfolioItemService service;
+    private final JwtService jwtService;
     private final CreatorRepository creatorRepository;
     private final TokenUtils tokenUtils;
 
     @Autowired
     public PortfolioItemController(TokenUtils tokenUtils, CreatorRepository creatorRepository,
-                                   PortfolioItemService service) {
+                                   PortfolioItemService service, JwtService jwtService) {
         this.tokenUtils = tokenUtils;
         this.creatorRepository = creatorRepository;
         this.service = service;
+        this.jwtService = jwtService;
     }
 
     @GetMapping
@@ -40,8 +45,8 @@ public class PortfolioItemController {
     }
 
     @PostMapping
-    public PortfolioItem create(@RequestHeader("Authorization") String authHeader, @RequestBody PortfolioItem item) {
-        return service.create(authHeader, item);
+    public PortfolioItemDto create(@RequestHeader HttpHeaders authHeader, @RequestBody PortfolioItemDto item) {
+        return service.create(jwtService.extractEmail(authHeader), item);
     }
 
     @DeleteMapping("/{id}")

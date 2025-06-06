@@ -16,6 +16,7 @@ public class PortfolioItem {
     @Column(unique = true)
     private String photoUrl;
 
+    @Column(length = 1000)
     private String description;
 
     private String title;
