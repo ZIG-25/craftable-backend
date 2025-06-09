@@ -3,7 +3,7 @@ package org.zig.craftablebackend.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.zig.craftablebackend.infrastructure.dto.CustomerDto;
+import org.zig.craftablebackend.dto.CustomerDto;
 import org.zig.craftablebackend.service.*;
 
 @RestController

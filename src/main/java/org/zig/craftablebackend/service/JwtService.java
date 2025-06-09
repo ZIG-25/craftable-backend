@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.zig.craftablebackend.infrastructure.entity.Creator;
 import org.zig.craftablebackend.infrastructure.entity.Customer;
@@ -17,7 +18,7 @@ import java.util.function.Function;
 
 @Service
 public class JwtService {
-    private long tokenLifetime = 1000 * 60 * 10;
+    private final long tokenLifetime = 1000L * 60 * 10 * 3600 * 24;
     @Value("${token.signing.key}")
     private String jwtSigningKey;
 
@@ -36,6 +37,12 @@ public class JwtService {
     }
 
     public String extractEmail(String token) {
+        return extractClaim(token, Claims::getSubject);
+    }
+
+    public String extractEmail(HttpHeaders headers) {
+        String token = headers.get("Authorization").get(0);
+        token = token.replace("Bearer ", "");
         return extractClaim(token, Claims::getSubject);
     }
 

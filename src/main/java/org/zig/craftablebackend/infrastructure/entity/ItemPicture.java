@@ -8,11 +8,10 @@ import lombok.Setter;
 @Getter
 @Entity
 public class ItemPicture {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer Id;
-
-    @Column(unique = true)
 
     private String photoUrl;
 

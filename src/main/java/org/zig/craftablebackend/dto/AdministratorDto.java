@@ -1,4 +1,4 @@
-package org.zig.craftablebackend.infrastructure.dto;
+package org.zig.craftablebackend.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

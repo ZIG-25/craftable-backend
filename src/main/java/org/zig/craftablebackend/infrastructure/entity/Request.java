@@ -14,7 +14,6 @@ public class Request {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer Id;
 
-    @Column(unique = true)
     private Integer price;
 
     private String description;

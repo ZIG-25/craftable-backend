@@ -3,7 +3,7 @@ package org.zig.craftablebackend.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.zig.craftablebackend.infrastructure.dto.CustomerDto;
+import org.zig.craftablebackend.dto.CustomerDto;
 import org.zig.craftablebackend.infrastructure.entity.*;
 import org.zig.craftablebackend.infrastructure.repository.*;
 

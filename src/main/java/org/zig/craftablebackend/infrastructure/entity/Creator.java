@@ -2,6 +2,7 @@ package org.zig.craftablebackend.infrastructure.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +14,7 @@ import java.util.Set;
 @Setter
 @Getter
 @Entity
+@ToString
 public class Creator {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,10 +36,11 @@ public class Creator {
 
     private Integer phoneNumber;
 
-    @OneToMany(mappedBy="creatorId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="creatorId", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Profession> professions;
 
-    @OneToMany(mappedBy="creatorId")
+    @OneToMany(mappedBy = "creatorId", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<PortfolioItem> portfolioItems;
 
     @OneToMany(mappedBy="creatorId")
